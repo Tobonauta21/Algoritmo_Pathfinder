@@ -16,6 +16,11 @@
 
 //Chamando os métodos
     var caminho = new Busca();
+    const limite = 5
     console.log('---CAMINHO BUSCA AMPLITUDE---')
     console.log(caminho.BuscaAmplitude('Goodsprings','New Vegas',nos,grafo))
+    console.log('---CAMINHO BUSCA PROFUNDIDADE---')
+    console.log(caminho.BuscaProfundidade('Goodsprings','New Vegas',nos,grafo))
+    console.log('---CAMINHO BUSCA PROFUNDIDADE LIMITADA---')
+    console.log(caminho.BuscaProfundidadeLimitada('Goodsprings','New Vegas',nos,grafo,limite))
    
