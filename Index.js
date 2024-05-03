@@ -23,4 +23,6 @@
     console.log(caminho.BuscaProfundidade('Goodsprings','New Vegas',nos,grafo))
     console.log('---CAMINHO BUSCA PROFUNDIDADE LIMITADA---')
     console.log(caminho.BuscaProfundidadeLimitada('Goodsprings','New Vegas',nos,grafo,limite))
+    console.log('---CAMINHO BUSCA BIDIRECIONAL---')
+    console.log(caminho.BuscaBidirecional('Goodsprings','New Vegas',nos,grafo))
    

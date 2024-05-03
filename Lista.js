@@ -98,6 +98,34 @@ class Lista{
         return caminho;
     }
 
+    ExibirCaminhoAlt(no){
+        let atual = this.head
+
+        while(atual.estado != no){
+            atual = atual.proximo
+        }
+
+        var caminho = []
+        atual = atual.pai
+
+        while(atual.pai!= null){
+            caminho.push(atual.estado)
+            atual = atual.pai
+        }
+
+        caminho.push(atual.estado)
+
+        return caminho
+    }
+
+    Primeiro(){
+        return this.head
+    }
+
+    Ultimo(){
+        return this.tail
+    }
+
 }
 
 module.exports = Lista
