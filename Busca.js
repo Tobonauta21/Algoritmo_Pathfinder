@@ -1,45 +1,47 @@
-const Lista = require('./Lista')
-
-class Busca{
+//Importando outras classes
+    const Lista = require('./Lista')
+    const Listap = require('./ListaPeso')
+//Classe de Busca
+    class Busca{
 
    
-    BuscaAmplitude(inicio, fim, nos, grafo) {
-        const l1 = new Lista();
-        const l2 = new Lista();
-        l1.AddUltimo(inicio, 0, null);
-        l2.AddUltimo(inicio, 0, null);
-        const visitado = [];
-        visitado.push([inicio, 0]);
+        BuscaAmplitude(inicio, fim, nos, grafo) {
+            const l1 = new Lista();
+            const l2 = new Lista();
+            l1.AddUltimo(inicio, 0, null);
+            l2.AddUltimo(inicio, 0, null);
+            const visitado = [];
+            visitado.push([inicio, 0]);
     
-        while (!l1.Vazio()) {
-            const atual = l1.DeletaPrimeiro();
-            const ind = nos.indexOf(atual.estado);
+                 while (!l1.Vazio()) {
+                    const atual = l1.DeletaPrimeiro();
+                    const ind = nos.indexOf(atual.estado);
             
-            const conexoes = grafo[ind].split(',');
-            for (const novo of conexoes) {
-                let flag = true;
-                for (const item of visitado) {
-                    if (item[0] === novo) {
-                        if (item[1] <= atual.nivel + 1) {
-                            flag = false;
-                        } else {
-                            item[1] = atual.nivel + 1;
+                    const conexoes = grafo[ind].split(',');
+                        for (const novo of conexoes) {
+                            let flag = true;
+                            for (const item of visitado) {
+                                if (item[0] === novo) {
+                                    if (item[1] <= atual.nivel + 1) {
+                                        flag = false;
+                                    } else {
+                                        item[1] = atual.nivel + 1;
+                                    }
+                                    break;
+                                }
+                            }   
+                    if (flag){
+                        l1.AddUltimo(novo, atual.nivel + 1, atual);
+                        l2.AddUltimo(novo, atual.nivel + 1, atual);
+                        visitado.push([novo, atual.nivel + 1]);
+                            if (novo === fim) {
+                                var caminho = []
+                                caminho += l2.ExibirCaminho()
+                                return 'Caminho encontrado->'+caminho
+                            }
+                            }
                         }
-                        break;
                     }
-                }
-                if (flag) {
-                    l1.AddUltimo(novo, atual.nivel + 1, atual);
-                    l2.AddUltimo(novo, atual.nivel + 1, atual);
-                    visitado.push([novo, atual.nivel + 1]);
-                    if (novo === fim) {
-                        var caminho = []
-                        caminho += l2.ExibirCaminho()
-                        return 'Caminho encontrado->'+caminho
-                    }
-                }
-            }
-        }
         return "caminho não encontrado";
     }
 
@@ -242,7 +244,66 @@ class Busca{
        
     }
 
-    
+    CustoUniforme(inicio,fim,nos,grafo){
+        const l1 = new Listap()
+        const l2 = new Listap()
+
+        const visitado = []
+
+        l1.AddUltimo(inicio,0,0,null)
+        l2.AddUltimo(inicio,0,0,null)
+
+        const linha = []
+        linha.push(inicio)
+        linha.push(0)
+        visitado.push(linha)
+
+        while(!l1.Vazio()){
+            const atual = l1.DeletaPrimeiro()
+
+            if(atual.estado === fim){
+                const caminho = []
+                caminho = l2.ExibirArvore2(atual.estado,atual.valor1)
+                return [caminho,atual.valor2]
+            }
+
+            const ind = nos.indexOf(atual.estado);
+            const conexoes = grafo[ind].split(',');
+            for (const novo of conexoes) {
+                const v2 = atual.valor2 + novo[1]
+                const v1 = v2
+
+                let flag1 = true
+                let flag2 = true
+
+                for (const item of visitado) {
+                    if (item[0] === novo) {
+                        if (item[1] <= v2) {
+                            flag1 = false;
+                        }else {
+                            item[1] = v2;
+                            flag2 = false
+                        }break;
+                    }
+                }
+
+                if (flag1){
+                    l1.AddPosX(novo[0], v1,v2, atual);
+                    l2.AddUltimo(novo[0], v1,v2, atual);
+                   
+                    if (flag2) {
+                        const linha = []
+                        linha.push(novo[0])
+                        linha.push(v2)
+                        visitado.push(linha)
+                    }
+                }
+            }
+        }
+
+        return 'Caminho não encontrado'
+
+    }
 
 }
 

@@ -53,4 +53,6 @@
     console.log(caminho.BuscaProfundidadeLimitada('Goodsprings','New Vegas',nos,grafo,limite))
     console.log('---CAMINHO BUSCA BIDIRECIONAL---')
     console.log(caminho.BuscaBidirecional('Goodsprings','New Vegas',nos,grafo))
+    console.log('---CAMINHO CUSTO UNIFORME---')
+    console.log(caminho.CustoUniforme('Goodsprings','New Vegas',cidades,conexoes))
    

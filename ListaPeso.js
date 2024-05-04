@@ -34,8 +34,33 @@
             this.tail = atual
         }
 
-        AddPosX(s,v1,v2,p){
-
+        AddPosX(s, v1, v2, p) {
+            
+            if (this.head === null) {
+                this.AddPrimeiro(s, v1, v2, p);
+            } else {
+                let atual = this.head;
+                while (atual.valor1 < v1) {
+                    atual = atual.proximo;
+                    if (atual === null) {
+                        break;
+                    }
+                }
+                if (atual === this.head) {
+                    this.AddPrimeiro(s, v1, v2, p);
+                } else {
+                    if (atual === null) {
+                        this.AddUltimo(s, v1, v2, p);
+                    } else {
+                        const novoNo = new No(p, s, v1, v2, null, null);
+                        const aux = atual.anterior;
+                        aux.proximo = novoNo;
+                        novoNo.anterior = aux;
+                        atual.anterior = novoNo;
+                        novoNo.proximo = atual;
+                    }
+                }
+            }
         }
 
         DeletaPrimeiro(){
@@ -95,7 +120,7 @@
         }
 
         ExibirArvore(){
-            const atual = this.tail
+            var atual = this.tail
             const caminho = []
 
             while(atual.pai!=null){
@@ -108,7 +133,7 @@
         }
 
         ExibirArvore1(estado){
-            const atual = this.head
+            var atual = this.head
             
             while(atual.estado != estado){
                 atual = atual.proximo
@@ -124,6 +149,34 @@
             caminho.push(atual.estado)
 
             return caminho
+        }
+
+        ExibirArvore2(estado,valor1){
+            const atual = this.tail
+            
+            while(atual.pai!= estado || atual.valor1 != valor1){
+                atual = atual.anterior
+            }
+
+            const caminho = []
+
+            while(atual.pai != null){
+                caminho.push(atual.estado)
+                atual = atual.pai
+            }
+
+            caminho.push(atual.estado)
+
+            return caminho
+            
+        }
+
+        Primeiro(){
+            return this.head
+        }
+
+        Ultimo(){
+            return this.tail
         }
 
     }
