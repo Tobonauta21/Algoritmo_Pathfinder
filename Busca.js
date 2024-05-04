@@ -144,11 +144,11 @@ class Busca{
     
         while (!l1.Vazio() || !l3.Vazio()) {
             while (!l1.Vazio()) {
-                if (ni !== l1.Primeiro().nivel) {
+                if (ni != l1.Primeiro().nivel) {
                     break;
                 }
     
-                const atual = l1.DeletaUltimo();
+                const atual = l1.DeletaPrimeiro();
                 const ind = nos.indexOf(atual.estado);
                 const conexoes = grafo[ind].split(',');
                 
@@ -190,7 +190,7 @@ class Busca{
             }
             
             while (!l3.Vazio()) {
-                if (ni !== l3.Primeiro().nivel) {
+                if (ni != l3.Primeiro().nivel) {
                     break;
                 }
     
