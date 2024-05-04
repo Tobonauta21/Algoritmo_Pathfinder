@@ -54,5 +54,5 @@
     console.log('---CAMINHO BUSCA BIDIRECIONAL---')
     console.log(caminho.BuscaBidirecional('Goodsprings','New Vegas',nos,grafo))
     console.log('---CAMINHO CUSTO UNIFORME---')
-    console.log(caminho.CustoUniforme('Goodsprings','New Vegas',cidades,conexoes))
+    console.log(caminho.CustoUniforme('GOODSPRINGS','NEW VEGAS',cidades,conexoes))
    

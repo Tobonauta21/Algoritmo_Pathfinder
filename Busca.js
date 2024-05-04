@@ -259,16 +259,16 @@
         visitado.push(linha)
 
         while(!l1.Vazio()){
-            const atual = l1.DeletaPrimeiro()
+            var atual = l1.DeletaPrimeiro()
 
             if(atual.estado === fim){
-                const caminho = []
+                var caminho = []
                 caminho = l2.ExibirArvore2(atual.estado,atual.valor1)
                 return [caminho,atual.valor2]
             }
 
             const ind = nos.indexOf(atual.estado);
-            const conexoes = grafo[ind].split(',');
+            const conexoes = grafo[ind];
             for (const novo of conexoes) {
                 const v2 = atual.valor2 + novo[1]
                 const v1 = v2
@@ -299,6 +299,7 @@
                     }
                 }
             }
+            
         }
 
         return 'Caminho não encontrado'

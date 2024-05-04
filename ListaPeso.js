@@ -35,7 +35,7 @@
         }
 
         AddPosX(s, v1, v2, p) {
-            
+
             if (this.head === null) {
                 this.AddPrimeiro(s, v1, v2, p);
             } else {
@@ -152,9 +152,11 @@
         }
 
         ExibirArvore2(estado,valor1){
-            const atual = this.tail
             
-            while(atual.pai!= estado || atual.valor1 != valor1){
+            var atual = this.tail
+            
+       
+            while(atual.estado!=estado || atual.valor1!=valor1){
                 atual = atual.anterior
             }
 
@@ -167,7 +169,7 @@
 
             caminho.push(atual.estado)
 
-            return caminho
+            return caminho.reverse()
             
         }
 
