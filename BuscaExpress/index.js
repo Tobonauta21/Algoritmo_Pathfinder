@@ -2,19 +2,50 @@
     const express = require('express')
     const app = new express()
     const path = require('path')
+    const {engine}=  require('express-handlebars')
     const bodyParser = require('body-parser')
-
+    const Busca = require('./Busca.js')
+    const caminho = new Busca()
+    const nos = ['GOODSPRINGS','SLOAN','FREESIDE','NEW VEGAS','PRIMM','NIPTON','NOVAC','BOULDER CITY'];
+    const grafo = ['SLOAN,PRIMM',
+        'GOODSPRINGS,FREESIDE',
+        'SLOAN,BOULDER CITY,NEW VEGAS',
+        'FREESIDE',
+        'GOODSPRINGS,NIPTON',
+        'PRIMM,NOVAC',
+        'NIPTON,BOULDER CITY',
+        'FREESIDE,NOVAC'];
 //Configurações
     //Pasta Public
         app.use(express.static(path.join(__dirname,'public')))
-
+        
     //Body-parser
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
+    //Handlebars
+        app.engine('handlebars', engine({defaultLayout:'main', runtimeOptions: {
+            allowProtoPropertiesByDefault: true,
+            allowProtoMethodsByDefault: true
+        }}));
+        app.set('view engine', 'handlebars');
 
 //Rotas
+    app.post('/busca',(req,res)=>{
+        
+        var inicio = req.body.inicio
+        var fim = req.body.fim
+        console.log('INICIO AQUI'+inicio)
+        console.log('FIM AQUI'+fim)
+        console.log('NOS AQUI '+nos)
+        console.log('GRAFOS AQUI '+grafo)
+        const rota = caminho.BuscaAmplitude(inicio,fim,nos,grafo)
+        
+        res.render('index',{rotas:rota})
+
+    })
+
     app.get('/',(req,res)=>{
-        res.render('index.html')
+        res.render('index')
     })
 //Host
     app.listen(3000,(req,res)=>{
