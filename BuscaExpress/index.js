@@ -93,6 +93,7 @@
         var fim = req.body.fim
         var rota = caminho.CustoUniforme(inicio,fim,cidades,conexoes)
         res.render('indexp',{rotas:rota})
+        
     })
 //Host
     app.listen(3000,(req,res)=>{
