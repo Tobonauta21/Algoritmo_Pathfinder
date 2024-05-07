@@ -1,6 +1,4 @@
 //Importando minha classe de busca
-   
-
 const grafo = {
     nodes: [
       { id: 1, label: "GOODSPRINGS" ,color:"#00FF00"},
