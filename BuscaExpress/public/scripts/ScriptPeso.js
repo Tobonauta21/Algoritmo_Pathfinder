@@ -1,51 +1,47 @@
+const cidades = ["NEW VEGAS","FREESIDE","GOODSPRINGS","PRIMM","NOVAC",
+                 "BOULDER CITY","CAMP MCCARRAN","NELLYS AIR FORCE BASE",
+                 "COTTONWOOD COVE","JACOBSTOWN","HOOVER DAM","BLACK MOUNTAIN",
+                 "SLOAN","FORLORN HOPE","THE STRIP","WESTSIDE","VAULT 21",
+                 "VAULT 22","SEARCHLIGHT"];
+
+const conexoes = [
+    [["BLACK MOUNTAIN",60], ["BOULDER CITY",120], ["FREESIDE",150]],
+    [["SEARCHLIGHT",100], ["GOODSPRINGS",80], ["NOVAC",90],["CAMP MCCARRAN",180]], 
+    [["NELLYS AIR FORCE BASE",80], ["SLOAN",120], ["PRIMM",110]], 
+    [["JACOBSTOWN",90], ["FREESIDE",140]], 
+    [["COTTONWOOD COVE",120]],
+    [["CAMP MCCARRAN",70], ["NEW VEGAS",100]], 
+    [["NEW VEGAS",110]], 
+    [["COTTONWOOD COVE",120], ["WESTSIDE",150]], 
+    [["JACOBSTOWN",100], ["SLOAN",90]],
+    [["THE STRIP",120],["HOOVER DAM",100]], 
+    [["THE STRIP",120], ["BLACK MOUNTAIN",80]], 
+    [["HOOVER DAM",150]], 
+    [["COTTONWOOD COVE",100], ["SLOAN",80], ["PRIMM",110]], 
+    [["WESTSIDE",90], ["GOODSPRINGS",130], ["FREESIDE",120]], 
+    [["THE STRIP",80], ["VAULT 21",70], ["VAULT 22",100], ["SEARCHLIGHT",140]], 
+    [["FREESIDE",90], ["NEW VEGAS",80]],
+    [["VAULT 21",90], ["NEW VEGAS",100]], 
+    [["VAULT 22",120], ["NEW VEGAS",110]], 
+    [["PRIMM",130], ["GOODSPRINGS",70]]
+];
+
 const grafo = {
-    nodes: [
-      { id: 1, label: "NEW VEGAS" ,color:"#00FF00"},
-      { id: 2, label: "FREESIDE" ,color:"#00FF00"},
-      { id: 3, label: "GOODSPRINGS" ,color:"#00FF00"},
-      { id: 4, label: "PRIMM" ,color:"#00FF00"},
-      { id: 5, label: "NOVAC" ,color:"#00FF00"},
-      { id: 6, label: "BOULDER CITY" ,color:"#00FF00"},
-      { id: 7, label: "MACARAN" ,color:"#00FF00"},
-      { id: 8, label: "NELLYS AIR FORCE BASE" ,color:"#00FF00"},
-      { id: 9, label: "COTTONWOOD CAVE" ,color:"#00FF00"},
-      { id: 10, label: "JACOBSTOWN" ,color:"#00FF00"},
-      { id: 11, label: "HOOVER DAM" ,color:"#00FF00"},
-      { id: 12, label: "BLACK MOUTAIN" ,color:"#00FF00"},
-      { id: 13, label: "SLOAN" ,color:"#00FF00"},
-      { id: 14, label: "FORLORN HOPE" ,color:"#00FF00"},
-      { id: 15, label: "THE STRIP" ,color:"#00FF00"},
-      { id: 16, label: "WESTSIDE" ,color:"#00FF00"},
-      { id: 17, label: "VAULT 21" ,color:"#00FF00"},
-      { id: 18, label: "VAULT 22" ,color:"#00FF00"},
-      { id: 19, label: "SEARCHLIGHT" ,color:"#00FF00"},
+    nodes: cidades.map((cidade, index) => ({ id: index + 1, label: cidade })),
+    edges: []
+};
 
-    ],
-    edges: [
-        { from: 1, to: 2, label: "80" }, // NEW VEGAS -> FREESIDE
-        { from: 1, to: 3, label: "80" }, // NEW VEGAS -> GOODSPRINGS
-        { from: 1, to: 4, label: "110" }, // NEW VEGAS -> PRIMM
-        { from: 1, to: 5, label: "90" }, // NEW VEGAS -> NOVAC
-        { from: 1, to: 10, label: "90" }, // NEW VEGAS -> JACOBSTOWN
-        { from: 1, to: 12, label: "60" }, // NEW VEGAS -> BLACK MOUNTAIN
-        { from: 1, to: 15, label: "110" }, // NEW VEGAS -> THE STRIP
-        { from: 1, to: 16, label: "150" }, // NEW VEGAS -> WESTSIDE
-        { from: 1, to: 17, label: "70" }, // NEW VEGAS -> VAULT 21
-        { from: 1, to: 18, label: "100" }, // NEW VEGAS -> VAULT 22
-        { from: 1, to: 19, label: "140" }, // NEW VEGAS -> SEARCHLIGHT
-      
-        { from: 2, to: 15, label: "150" }, // FREESIDE -> THE STRIP
-        { from: 2, to: 4, label: "150" }, // FREESIDE -> PRIMM
-        { from: 2, to: 19, label: "150" }, // FREESIDE -> SEARCHLIGHT
-        { from: 2, to: 9, label: "150" }, // FREESIDE -> COTTONWOOD CAVE
-      
-      
-    
-    ]
-  };
+conexoes.forEach((conexoesDaCidade, index) => {
+    const fromId = index + 1;
+    conexoesDaCidade.forEach(([toCity, peso]) => {
+        const toId = cidades.indexOf(toCity) + 1;
+        if (toId !== -1) {
+            grafo.edges.push({ from: fromId, to: toId, label:`${peso}` });
+        }
+    });
+});
 
-  // Crie uma instância da rede
-  const container = document.getElementById("grafo");
+const container = document.getElementById("grafo");
   const data = {
     nodes: new vis.DataSet(grafo.nodes),
     edges: new vis.DataSet(grafo.edges)

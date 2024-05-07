@@ -1,6 +1,6 @@
 //Importando outras classes
     const Lista = require('./Lista')
-//const Listap = require('./ListaPeso')
+    const Listap = require('./ListaPeso')
 //Classe de Busca
     
     class Busca{
@@ -244,7 +244,7 @@
        
     }
 
-    /*CustoUniforme(inicio,fim,nos,grafo){
+    CustoUniforme(inicio,fim,nos,grafo){
         const l1 = new Listap()
         const l2 = new Listap()
 
@@ -304,7 +304,7 @@
 
         return 'Caminho não encontrado'
 
-    }*/
+    }
 
 }
 

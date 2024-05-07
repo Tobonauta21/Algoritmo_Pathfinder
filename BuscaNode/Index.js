@@ -45,6 +45,7 @@
 //Chamando os métodos
     var caminho = new Busca();
     const limite = 5
+    const rota = caminho.CustoUniforme('GOODSPRINGS','SEARCHLIGHT',cidades,conexoes)
     console.log('---CAMINHO BUSCA AMPLITUDE---')
     console.log(caminho.BuscaAmplitude('Goodsprings','New Vegas',nos,grafo))
     console.log('---CAMINHO BUSCA PROFUNDIDADE---')
@@ -55,4 +56,6 @@
     console.log(caminho.BuscaBidirecional('Goodsprings','New Vegas',nos,grafo))
     console.log('---CAMINHO CUSTO UNIFORME---')
     console.log(caminho.CustoUniforme('GOODSPRINGS','SEARCHLIGHT',cidades,conexoes))
+    console.log('---CAMINHO CUSTO UNIFORME---')
+    console.log(rota)
    
