@@ -54,6 +54,9 @@
     app.get('/',(req,res)=>{
         res.render('index')
     })
+    app.get('/peso',(req,res)=>{
+        res.redner('indexp')
+    })
 //Host
     app.listen(3000,(req,res)=>{
         console.log('Servidor ouvindo em localhost:3000')
