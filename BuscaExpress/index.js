@@ -4,7 +4,7 @@
     const path = require('path')
     const {engine}=  require('express-handlebars')
     const bodyParser = require('body-parser')
-    const Busca = require('./Busca.js')
+    const Busca = require('../BuscaExpress/src/Busca')
     const caminho = new Busca()
     const nos = ['GOODSPRINGS','SLOAN','FREESIDE','NEW VEGAS','PRIMM','NIPTON','NOVAC','BOULDER CITY'];
     const grafo = ['SLOAN,PRIMM',
@@ -92,7 +92,6 @@
         var inicio = req.body.inicio
         var fim = req.body.fim
         var rota = caminho.CustoUniforme(inicio,fim,cidades,conexoes)
-        console.log(rota)
         res.render('indexp',{rotas:rota})
     })
 //Host
