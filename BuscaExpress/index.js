@@ -34,11 +34,18 @@
         
         var inicio = req.body.inicio
         var fim = req.body.fim
-        console.log('INICIO AQUI'+inicio)
-        console.log('FIM AQUI'+fim)
-        console.log('NOS AQUI '+nos)
-        console.log('GRAFOS AQUI '+grafo)
-        const rota = caminho.BuscaAmplitude(inicio,fim,nos,grafo)
+        var metodo = req.body.metodo
+        var rota
+
+        if(metodo === 'amplitude'){
+            rota = caminho.BuscaAmplitude(inicio,fim,nos,grafo)
+        }
+        if(metodo === 'profundidade'){
+            rota = caminho.BuscaProfundidade(inicio,fim,nos,grafo)
+        }
+        if(metodo === 'bidirecional'){
+            rota = caminho.BuscaBidirecional(inicio,fim,nos,grafo)
+        }
         
         res.render('index',{rotas:rota})
 
