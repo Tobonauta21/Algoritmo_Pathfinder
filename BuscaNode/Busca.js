@@ -306,6 +306,40 @@
 
     }
 
+    npzeros(tam){
+        var matriz = []
+
+        for (var i = 0; i < tam; i++) {
+            matriz[i] = [];
+            for (var j = 0; j < tam; j++) {
+                matriz[i][j] = 0;
+            }
+        }
+
+        return matriz
+    }
+    uniform(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    Gera_H(nos,n,grafo){
+        var h = npzeros(n)
+        var i = 0
+
+        for(var no_destino in nos){
+            var j = 0
+            for(var no_origem in nos){
+                if(no_origem != no_destino){
+                    var v = this.CustoUniforme(no_origem,no_destino,nos,grafo)
+                    h[i][j] = v*this.uniform(0.8,1)
+                }
+                j++
+            }
+            i++
+        }
+
+        return h
+    }
+
 }
 
 module.exports = Busca
