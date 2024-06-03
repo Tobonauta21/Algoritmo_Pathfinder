@@ -64,6 +64,7 @@
         var inicio = req.body.inicio
         var fim = req.body.fim
         var metodo = req.body.metodo
+        var limit = req.body.qtd
         var rota
 
         if(metodo === 'amplitude'){
@@ -74,6 +75,9 @@
         }
         if(metodo === 'bidirecional'){
             rota = caminho.BuscaBidirecional(inicio,fim,nos,grafo)
+        }
+        if(metodo === 'pfdlt'){
+            rota = caminho.BuscaProfundidadeLimitada(inicio,fim,nos,grafo,limit)
         }
         
         res.render('index',{rotas:rota})

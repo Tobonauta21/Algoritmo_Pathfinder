@@ -1,6 +1,17 @@
 body{
-    background-image: url("/img/cover.png");
+    background-image: url("/img/background2.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+select{
+  background: transparent;
+  color: green;
+}
+
+input{
+  background-color: transparent;
+  color: green;
+  border: 1px solid green;
 }
