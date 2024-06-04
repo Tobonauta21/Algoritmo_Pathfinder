@@ -306,6 +306,101 @@
 
     }
 
+    Greedy(inicio,fim,nos,grafo){
+        
+        var i_fim = nos.indexOf(fim)
+
+        var i = 0
+        var j = 0
+        const h = Array.from({ length: 50 }, () => Array.from({ length: 50}).fill(0))
+      
+        var x = []
+
+        for (const no1 of nos ){
+            j = 0
+            for (const no2 of nos){
+                console.log(no1,no2)
+                if(no1!=no2){
+                    console.log('passo 2 ')
+                    x = this.CustoUniforme(no1,no2,nos,grafo)
+                    h[i][j] = x[1]
+                    console.log(x[1])
+                }
+                else{
+                    console.log('passo 3')
+                    h[i][j] = 0
+
+                }
+                j++
+            i++
+                
+
+            }
+        }
+        
+        
+        const l1 = new Listap()
+        const l2 = new Listap()
+
+        const visitado = []
+
+        l1.AddUltimo(inicio,0,0,null)
+        l2.AddUltimo(inicio,0,0,null)
+
+        const linha = []
+        linha.push(inicio)
+        linha.push(0)
+        visitado.push(linha)
+
+        while(!l1.Vazio()){
+            var atual = l1.DeletaPrimeiro()
+
+            if(atual.estado === fim){
+                var caminho = []
+                caminho = l2.ExibirArvore2(atual.estado,atual.valor1)
+                return [caminho,atual.valor2]
+            }
+
+            const ind = nos.indexOf(atual.estado);
+            const conexoes = grafo[ind];
+            for (const novo of conexoes) {
+                var i_novo = nos.indexOf(novo[0]);
+                const v2 = atual.valor2 + novo[1]
+                const v1 = h[i_fim][i_novo]
+
+                let flag1 = true
+                let flag2 = true
+
+                for (const item of visitado) {
+                    if (item[0] === novo) {
+                        if (item[1] <= v2) {
+                            flag1 = false;
+                        }else {
+                            item[1] = v2;
+                            flag2 = false
+                        }break;
+                    }
+                }
+
+                if (flag1){
+                    l1.AddPosX(novo[0], v1,v2, atual);
+                    l2.AddUltimo(novo[0], v1,v2, atual);
+                   
+                    if (flag2) {
+                        const linha = []
+                        linha.push(novo[0])
+                        linha.push(v2)
+                        visitado.push(linha)
+                    }
+                }
+            }
+            
+        }
+
+        return 'Caminho não encontrado'
+
+    }
+
 }
 
 module.exports = Busca
