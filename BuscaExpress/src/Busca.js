@@ -308,38 +308,35 @@
 
     }
 
+    
+
     Greedy(inicio,fim,nos,grafo){
         
         var i_fim = nos.indexOf(fim)
         var i = 0
         var j = 0
-
-        //const h = Array.from({ length: 50 }, () => Array.from({ length: 50}).fill(0))
+        const n = nos.length
+        console.log('tamanho de n ',n)
+        const h = Array.from({ length: n }, () => Array.from({ length: n}).fill(0))
       
-        //var x = []
+        var x = []
 
-        /*for (const no1 of nos ){
+        for (const no1 of nos ){
             j = 0
             for (const no2 of nos){
-                console.log(no1,no2)
                 if(no1!=no2){
-                    console.log('passo 2 ')
                     x = this.CustoUniforme(no1,no2,nos,grafo)
-                    h[i][j] = x[1]*random.real(0.8,1)
-                    console.log(x[1])
+                    h[i][j] = x[1]*(Math.random() * (1 - 0.8) + 0.8)
                 }
                 else{
-                    console.log('passo 3')
-                    h[i][j] = 0
 
+                    h[i][j] = 0
                 }
                 j++
-            i++
-                
-
             }
-        }*/
-        const h = Array.from({ length: 50 }, () => Array.from({ length: 50}).fill(0))
+            i++
+        }
+
         const l1 = new Listap()
         const l2 = new Listap()
 
@@ -355,7 +352,6 @@
 
         while(!l1.Vazio()){
             var atual = l1.DeletaPrimeiro()
-            console.log(atual)
             if(atual.estado === fim){
                 var caminho = []
                 caminho = l2.ExibirArvore2(atual.estado,atual.valor1)
@@ -402,19 +398,32 @@
 
     }
 
-
     Aestrela(inicio,fim,nos,grafo){
         
-    var i_fim = nos.indexOf(fim)
+        var i_fim = nos.indexOf(fim)
+        var i = 0
+        var j = 0
+        const n = nos.length
+        console.log('tamanho de n ',n)
+        const h = Array.from({ length: n }, () => Array.from({ length: n}).fill(0))
+      
+        var x = []
 
-    var i = 0
-    var j = 0
-    const h = Array.from({ length: 50 }, () => Array.from({ length: 50}).fill(0))
-  
-    var x = []
+        for (const no1 of nos ){
+            j = 0
+            for (const no2 of nos){
+                if(no1!=no2){
+                    x = this.CustoUniforme(no1,no2,nos,grafo)
+                    h[i][j] = x[1]*(Math.random() * (1 - 0.8) + 0.8)
+                }
+                else{
 
-
-    
+                    h[i][j] = 0
+                }
+                j++
+            }
+            i++
+        }
     const l1 = new Listap()
     const l2 = new Listap()
 
