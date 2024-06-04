@@ -22,7 +22,7 @@
     "SLOAN","FORLORN HOPE","THE STRIP","WESTSIDE","VAULT 21",
     "VAULT 22","SEARCHLIGHT"];
 
-    const conexoes = [
+    /*const conexoes = [
         [["BLACK MOUNTAIN",60], ["BOULDER CITY",120], ["FREESIDE",150]],
         [["SEARCHLIGHT",100], ["GOODSPRINGS",80], ["NOVAC",90],["CAMP MCCARRAN",180]], 
         [["NELLYS AIR FORCE BASE",80], ["SLOAN",120], ["PRIMM",110]], 
@@ -42,7 +42,30 @@
         [["VAULT 21",90], ["NEW VEGAS",100]], 
         [["VAULT 22",120], ["NEW VEGAS",110]], 
         [["PRIMM",130], ["GOODSPRINGS",70]]
-    ];
+    ];*/
+const conexoes = [
+    [["BLACK MOUNTAIN", 60], ["BOULDER CITY", 120], ["FREESIDE", 150]],
+    [["SEARCHLIGHT", 100], ["GOODSPRINGS", 80], ["NOVAC", 90], ["CAMP MCCARRAN", 180]],
+    [["GOODSPRINGS", 80], ["PRIMM", 90], ["NOVAC", 70]],
+    [["NOVAC", 70], ["COTTONWOOD COVE", 90], ["JACOBSTOWN", 110]],
+    [["JACOBSTOWN", 110], ["HOOVER DAM", 130], ["CAMP MCCARRAN", 90]],
+    [["CAMP MCCARRAN", 90], ["NELLYS AIR FORCE BASE", 80], ["SEARCHLIGHT", 160]],
+    [["SEARCHLIGHT", 160], ["SLOAN", 120], ["THE STRIP", 180]],
+    [["THE STRIP", 180], ["WESTSIDE", 90], ["VAULT 21", 100]],
+    [["VAULT 21", 100], ["VAULT 22", 60], ["FORLORN HOPE", 110]],
+    [["THE STRIP", 120], ["BLACK MOUNTAIN", 80], ["VAULT 21", 110]],
+    [["HOOVER DAM", 150], ["VAULT 22", 120]],
+    [["COTTONWOOD COVE", 120], ["PRIMM", 110]],
+    [["WESTSIDE", 150], ["COTTONWOOD COVE", 120]],
+    [["SLOAN", 90], ["JACOBSTOWN", 100]],
+    [["FORLORN HOPE", 110], ["PRIMM", 130]],
+    [["GOODSPRINGS", 130], ["FREESIDE", 120]],
+    [["NEW VEGAS", 80], ["FREESIDE", 90]],
+    [["NEW VEGAS", 100], ["VAULT 21", 90], ["VAULT 22", 120]],
+    [["NEW VEGAS", 110], ["VAULT 22", 110]],
+    [["NEW VEGAS", 100], ["CAMP MCCARRAN", 70]],
+    [["PRIMM", 130], ["GOODSPRINGS", 70]]
+];
 
 //Configurações
     //Pasta Public
@@ -95,7 +118,19 @@
     app.post('/buscapeso',(req,res)=>{
         var inicio = req.body.inicio
         var fim = req.body.fim
-        var rota = caminho.CustoUniforme(inicio,fim,cidades,conexoes)
+        var rota 
+        var metodo = req.body.metodo
+        
+        if(metodo === 'custoUniforme'){
+            rota = caminho.CustoUniforme(inicio,fim,cidades,conexoes)
+        }
+
+        if(metodo === 'greedy'){
+            rota = caminho.Greedy(inicio,fim,cidades,conexoes)
+        }
+        if(metodo === 'aestrela'){
+            rota = caminho.Aestrela(inicio,fim,cidades,conexoes)
+        }
         res.render('indexp',{rotas:rota})
         
     })

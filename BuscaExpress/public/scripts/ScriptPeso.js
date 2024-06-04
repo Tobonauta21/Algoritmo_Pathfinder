@@ -17,7 +17,7 @@ const conexoes = [
     [["THE STRIP",120],["HOOVER DAM",100]], 
     [["THE STRIP",120], ["BLACK MOUNTAIN",80]], 
     [["HOOVER DAM",150]], 
-    [["COTTONWOOD COVE",100], ["SLOAN",80], ["PRIMM",110]], 
+    [["COTTONWOOD COVE",100], ["PRIMM",110]], 
     [["WESTSIDE",90], ["GOODSPRINGS",130], ["FREESIDE",120]], 
     [["THE STRIP",80], ["VAULT 21",70], ["VAULT 22",100], ["SEARCHLIGHT",140]], 
     [["FREESIDE",90], ["NEW VEGAS",80]],
