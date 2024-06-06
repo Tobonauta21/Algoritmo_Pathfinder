@@ -108,6 +108,9 @@ const cidades = ["ARAD","BUCARESTE","CRAIOVA","DOBRETA","EFORIE",
             rota = caminho.Aestrela(inicio,fim,cidades,conexoes)
         }
 
+        if(metodo === 'aiaestrela'){
+            rota = caminho.Ai_aestrela(inicio,fim,cidades,conexoes)
+        }
         res.render('indexp',{rotas:rota})
         
     })
